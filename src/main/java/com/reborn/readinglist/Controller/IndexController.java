@@ -10,7 +10,7 @@ public class IndexController {
     @RequestMapping("/index")
     public String index(Model model) {
 //        model.
-        model.addAttribute("title", "阅读者清单");
+        model.addAttribute("title", "阅读清单");
         model.addAttribute("name", "读书记录");
         return "index";
     }

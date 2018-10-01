@@ -7,26 +7,29 @@
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <!--<script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>-->
     <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-    <title>Login</title>
+    <title>登录</title>
 </head>
-<body>
+<body background="/city.jpg">
+<h1 style="text-align: center;margin-top: 100px;margin-bottom: 100px;">读书记录</h1>
 <div style="margin: 0 auto;padding: 1.5rem; border-width: .2rem;width: 500px;">
     <div>
         <form action="#" th:action="@{/reader/loginaction}" th:object="${reader}" method="post">
             <div class="form-group">
-                <label for="username">Username</label>
+                <label for="username" style="color: antiquewhite;">昵称</label>
                 <input type="text" th:field="*{username}" class="form-control" id="username" placeholder="Enter username">
                 <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
             </div>
             <div class="form-group">
-                <label for="fullname">Fullname</label>
+                <label for="fullname" style="color: antiquewhite;">全名</label>
                 <input type="text" th:field="*{fullname}" class="form-control" id="fullname" placeholder="Enter fullname">
             </div>
             <div class="form-group">
-                <label for="password">Password</label>
+                <label for="password" style="color: antiquewhite;">密码</label>
                 <input type="password" th:field="*{password}" class="form-control" id="password" placeholder="Password">
             </div>
-            <button type="submit" class="btn btn-primary" style="margin: 0 auto;">Submit</button>
+            <div style="width: 50%;display: grid;">
+                <button type="submit" class="btn btn-primary" style="margin-right: 5px;">登录</button>
+            </div>
         </form>
     </div>
 </div>
