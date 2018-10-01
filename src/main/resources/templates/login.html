@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <!--<script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>-->
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <title>Login</title>
+</head>
+<body>
+<div style="margin: 0 auto;padding: 1.5rem; border-width: .2rem;width: 500px;">
+    <div>
+        <form action="#" th:action="@{/reader/loginaction}" th:object="${reader}" method="post">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" th:field="*{username}" class="form-control" id="username" placeholder="Enter username">
+                <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+            </div>
+            <div class="form-group">
+                <label for="fullname">Fullname</label>
+                <input type="text" th:field="*{fullname}" class="form-control" id="fullname" placeholder="Enter fullname">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" th:field="*{password}" class="form-control" id="password" placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-primary" style="margin: 0 auto;">Submit</button>
+        </form>
+    </div>
+</div>
+</body>
+<!--<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>-->
+<!--<script lang="javascript">-->
+    <!--$("#submitButton").click()-->
+
+<!--</script>-->
+</html>

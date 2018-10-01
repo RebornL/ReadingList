@@ -1,0 +1,75 @@
+<html xmlns:th="http://www.springframework.org/schema/data/jaxb">
+<head>
+    <title>Reading List</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <!--<script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>-->
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+</head>
+<body style="margin-left: 2%;margin-top: 2%;" background="/city.jpg">
+    <h2 class="fontClass">Your Reading List</h2>
+    <div class="row" th:unless="${#lists.isEmpty(books)}">
+        <!--<div >-->
+            <div class="col-sm-3" th:each="book : ${books}">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${book.title}"></h5>
+                        <h6 class="card-subtitle mb-2 text-muted" th:text="${book.author}"></h6>
+                        <p class="card-text" th:if="${book.description}"
+                           th:text="${book.description}">Description</p>
+                        <p th:if="${book.description eq null}">
+                            No description available</p>
+                        <a href="#" class="card-link" th:href="'http://www.amazon.com/gp/product/'+ ${book.isbn}+ '/tag=${amazonID}'">书本链接</a>
+                        <a href="#" class="card-link" th:href="'http://www.amazon.com/gp/product/'+ ${book.isbn}+ '/tag=${amazonID}'">作者介绍</a>
+                        <br><a href="#" th:href="@{/readingList/delete/{id}(id=${book.id})}" class="btn btn-primary" style="margin-top: 10px;">删除卡片</a>
+                    </div>
+                </div>
+            </div>
+        <!--</div>-->
+    </div>
+    <!--<div th:unless="${#lists.isEmpty(books)}">-->
+        <!--<dl th:each="book : ${books}">-->
+            <!--<dt class="bookHeadline">-->
+                <!--&lt;!&ndash;<span th:text="${book.title}">Title</span> by&ndash;&gt;-->
+                <!--<a th:href="'http://www.amazon.com/gp/product/'+ ${book.isbn}+ '/tag=${amazonID}'"-->
+                   <!--th:text="${book.title}">Title</a> By-->
+                <!--<span th:text="${book.author}">Author</span>-->
+                <!--(ISBN: <span th:text="${book.isbn}">ISBN</span>)-->
+            <!--</dt>-->
+            <!--<dd class="bookDescription">-->
+                <!--<span th:if="${book.description}"-->
+                  <!--th:text="${book.description}">Description</span>-->
+                <!--<span th:if="${book.description eq null}">-->
+    <!--No description available</span>-->
+            <!--</dd>-->
+        <!--</dl>-->
+    <!--</div>-->
+    <div th:if="${#lists.isEmpty(books)}">
+        <p>You have no books in your book list</p>
+    </div>
+    <hr/>
+    <h3 class="fontClass">Add a book</h3>
+    <form method="POST" action="#" th:action="@{/readingList/mark}" th:object="${bookEntity}">
+        <input type="hidden" th:field="*{reader}" th:value="${reader}">
+        <div class="form-group">
+        <label for="title" class="fontClass">Title:</label>
+        <input type="text" th:field="*{title}" id="title" class="form-control" name="title" size="50" style="width: 220px;">
+        </div>
+        <div class="form-group">
+        <label for="author" class="fontClass">Author:</label>
+        <input type="text" th:field="*{author}" id="author" class="form-control" name="author" size="50" style="width: 220px;">
+        </div>
+        <div class="form-group">
+        <label for="isbn" class="fontClass">ISBN:</label>
+        <input type="text" th:field="*{isbn}" id="isbn" class="form-control" name="isbn" size="15" style="width: 220px;">
+        </div>
+        <div class="form-group">
+        <label for="description" class="fontClass">Description:</label><br/>
+        <textarea th:field="*{description}" id="description" class="text-area" name="description" cols="80" rows="5">
+        </textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">记录</button>
+    </form>
+</body>
+</html>

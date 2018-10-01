@@ -1,0 +1,46 @@
+buildscript {
+    ext {
+        springBootVersion = '2.0.4.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}") {
+            configurations {
+                all*.exclude group:'org.springframework.boot',
+                        module:'spring-boot-starter-logging'
+            }
+        }
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.reborn'
+version = '0.0.1'
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile("org.springframework.boot:spring-boot-starter-log4j")
+//    runtime('com.h2database:h2')
+    compile('mysql:mysql-connector-java')
+    compile('org.apache.commons:commons-pool2')//redis必须要带上的
+//    compile("org.mybatis.spring.boot:mybatis-spring-boot-starter")
+    compile("org.springframework.session:spring-session-data-redis")
+    compile("org.springframework.boot:spring-boot-starter-data-redis")
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+
+}

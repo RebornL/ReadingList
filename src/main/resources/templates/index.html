@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/data/jaxb">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}"></title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css">
+</head>
+<body background="/city.jpg">
+<h1 th:text="${name}" style="text-align: center;margin-top: 100px;"></h1>
+
+<blockquote class="blockquote text-center" style="margin-top: 10%; color: whitesmoke;">
+    <p class="mb-0">我一生的嗜好，除了革命之外，就是读书。我一天不读书，就不能够生活。</p>
+    <footer class="blockquote-footer"><cite title="Source Title" style="color: antiquewhite;">---孙中山</cite></footer>
+</blockquote>
+<blockquote class="blockquote text-center" style="margin-top: 10%; color: whitesmoke;">
+    <p class="mb-0">读书无嗜好，就能尽其多。不先泛览群书，则会无所适从或失之偏好，广然后深，博然后专。</p>
+    <footer class="blockquote-footer"><cite title="Source Title" style="color: antiquewhite;">---鲁迅</cite></footer>
+</blockquote>
+
+<div style="text-align: center;margin-top: 200px;">
+    <a href="/reader/login" style="border: 1px solid blue; margin: 5px;padding: 15px;border: 5px;background-color: cornflowerblue;border-radius: 2px">开始记录</a>
+</div>
+</body>
+</html>
