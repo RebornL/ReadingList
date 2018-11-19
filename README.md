@@ -1,7 +1,7 @@
 # ReadingList
 采用SpringBoot2+gradle+Thymeleaf构建一个读书清单记录。
 
-
+【2018-11-17】重构代码，调整结构，简化controller代码，启用hikari数据连接池。后期如果可能的话，改成前后端分离，前端重新调整（确实太丑了），后端改成提供REST服务。
 
 ## 前言
 
