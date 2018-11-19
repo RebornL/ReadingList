@@ -1,9 +1,6 @@
 package com.reborn.readinglist.Entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity//表明这是一个JPA实体
@@ -12,10 +9,20 @@ public class Book implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "reader", unique = true, nullable = false)
     private String reader;
+
+    @Column(name = "isbn")
     private String isbn;
+
+    @Column(name = "title")
     private String title;
+
+    @Column(name = "author")
     private String author;
+
+    @Column(name = "description")
     private String description;
 
     public Long getId() {

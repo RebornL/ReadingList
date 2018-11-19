@@ -2,9 +2,7 @@ package com.reborn.readinglist.Controller;
 
 
 import com.reborn.readinglist.Entity.Book;
-import com.reborn.readinglist.Entity.Reader;
-import com.reborn.readinglist.Repository.ReaderRepository;
-import com.reborn.readinglist.Repository.ReadingListRepository;
+import com.reborn.readinglist.Service.ReadingListServiceImpl;
 import com.reborn.readinglist.config.AmazonProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,70 +18,35 @@ import java.util.List;
 public class ReadingListController {
 
     @Autowired
-    private ReadingListRepository readingListRepository;
-
-    @Autowired
-    private ReaderRepository readerRepository;
+    private ReadingListServiceImpl readingListService;
 
     @Autowired
     private AmazonProperties amazonProperties;
 
-//    @Autowired
-//    public ReadingListController(ReadingListRepository readingListRepository,
-//                                 AmazonProperties amazonProperties) {
-//        this.readingListRepository = readingListRepository;
-//        this.amazonProperties = amazonProperties;
-//    }
-
-
-//    public void setAssociateId(String associateId) {
-//        this.associateId = associateId;
-//    }
-
-//    @RequestMapping(method = RequestMethod.GET)
-//    public String readersBooks(Reader reader, Model model) {
-//        System.out.println(amazonProperties.getAssociatedId());
-//        List<Book> readingList = readingListRepository.findByReader(reader);
-//
-//        if (readingList != null) {
-//            model.addAttribute("books", readingList);
-//            model.addAttribute("reader",reader);
-//            model.addAttribute("amazonID", amazonProperties.getAssociatedId());//将associateID放入模型中
-//        }
-//
-//        return "readingList";
-//    }
-//
-//    @RequestMapping(method = RequestMethod.POST)
-//    public String addToReadingList(Reader reader, Book book) {
-//        book.setReader(reader);
-//        readingListRepository.save(book);
-//        return "redirect:/readingList";
-//    }
-
     @RequestMapping(value = "/{reader}", method = RequestMethod.GET)
-    public String readerBooks(@PathVariable("reader") String reader, Model model) {
+    public String readerBooks(@PathVariable("reader") String readername, Model model) {
 //        Reader reader1 = readerRepository.getOne(reader);
-        List<Book> readingList = readingListRepository.findByReader(reader);
+        List<Book> readingList = readingListService.getBookList(readername);
         if (readingList != null) {
             model.addAttribute("books", readingList);
-            model.addAttribute("reader",reader);
+            model.addAttribute("reader",readername);
             model.addAttribute("amazonID", amazonProperties.getAssociatedId());//将associateID放入模型中
             Book book = new Book();
-            book.setReader(reader);
+            book.setReader(readername);
             model.addAttribute("bookEntity", book);
         }
 
         return "/readingList";//返回readingList这个展示界面
     }
 
+    //mark接口添加书本记录
     @RequestMapping(value = "/mark", method = RequestMethod.POST)
     public String addToReadingList(Book bookEntity) {//@PathVariable("reader") String reader,
         //将请求正文中数据绑定到book中
         System.out.println(bookEntity);
 //        Reader reader1 = readerRepository.getOne(bookEntity.getReader());
 //        bookEntity.setReader(reader);
-        readingListRepository.save(bookEntity);
+        readingListService.saveBook(bookEntity);
         return "redirect:/readingList/"+bookEntity.getReader();
     }
 
@@ -91,11 +54,12 @@ public class ReadingListController {
     public String deleteReadingList(@PathVariable long id) {//@PathVariable("reader") String reader,
         //将请求正文中数据绑定到book中
         System.out.println(id);
-        Book bookEntity = readingListRepository.getOne(id);
-        System.out.println(bookEntity);
+//        Book bookEntity = readingListRepository.getOne(id);
+//        System.out.println(bookEntity);
 //        Reader reader1 = readerRepository.getOne(bookEntity.getReader());
 //        bookEntity.setReader(reader);
-        readingListRepository.delete(bookEntity);
-        return "redirect:/readingList/"+bookEntity.getReader();
+        Book bookEntity = readingListService.deleteBook(id);
+        if(bookEntity != null) return "redirect:/readingList/"+bookEntity.getReader();
+        else return "redirect:/readingList/login";
     }
 }

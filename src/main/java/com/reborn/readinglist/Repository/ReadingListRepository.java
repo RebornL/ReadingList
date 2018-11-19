@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ReadingListRepository extends JpaRepository<Book, Long> {
     //只需要定义接口，SpringBoot会自动实现
-    List<Book> findByReader(String reader);
-
+    List<Book> findByReader(String readername);
+    Book deleteById(long id);
 //    Book findById(Long id);
 }

@@ -34,9 +34,11 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
     compile('org.springframework.boot:spring-boot-starter-web')
     compile("org.springframework.boot:spring-boot-starter-log4j")
+    compile("org.springframework.boot:spring-boot-starter-data-redis")
 //    runtime('com.h2database:h2')
     compile('mysql:mysql-connector-java')
     compile('org.apache.commons:commons-pool2')//redis必须要带上的
+    compile(group: 'redis.clients', name: 'jedis', version: '2.9.0')
 //    compile("org.mybatis.spring.boot:mybatis-spring-boot-starter")
     compile("org.springframework.session:spring-session-data-redis")
     compile("org.springframework.boot:spring-boot-starter-data-redis")

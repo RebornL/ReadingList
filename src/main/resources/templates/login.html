@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <!--<script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>-->
     <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <title>登录</title>
 </head>
@@ -13,9 +12,10 @@
 <h1 style="text-align: center;margin-top: 100px;margin-bottom: 100px;">读书记录</h1>
 <div style="margin: 0 auto;padding: 1.5rem; border-width: .2rem;width: 500px;">
     <div>
-        <form action="#" th:action="@{/reader/loginaction}" th:object="${reader}" method="post">
+        <!--<form action="#" th:action="@{/reader/loginaction}" th:object="${reader}" method="post">-->
+        <form action="#" id="loginId" th:object="${reader}" method="post">
             <div class="form-group">
-                <label for="username" style="color: antiquewhite;">昵称</label>
+                <label for="username" style="color: antiquewhite;">昵称(必填)</label>
                 <input type="text" th:field="*{username}" class="form-control" id="username" placeholder="Enter username">
                 <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
             </div>
@@ -24,19 +24,28 @@
                 <input type="text" th:field="*{fullname}" class="form-control" id="fullname" placeholder="Enter fullname">
             </div>
             <div class="form-group">
-                <label for="password" style="color: antiquewhite;">密码</label>
+                <label for="password" style="color: antiquewhite;">密码(必填)</label>
                 <input type="password" th:field="*{password}" class="form-control" id="password" placeholder="Password">
             </div>
-            <div style="width: 50%;display: grid;">
-                <button type="submit" class="btn btn-primary" style="margin-right: 5px;">登录</button>
+            <div style="margin-left: 70%; ">
+                <button type="submit" class="btn btn-primary" style="margin-right: 5px;" th:onclick="'javascript:register()'">注册</button>
+                <button type="submit" class="btn btn-primary" style="margin-right: 5px;margin-top: 0px;" th:onclick="'javascript:login()'">登录</button>
             </div>
         </form>
     </div>
 </div>
 </body>
 <!--<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>-->
-<!--<script lang="javascript">-->
-    <!--$("#submitButton").click()-->
+<script lang="javascript">
+    // $("#submitButton").click()
+    function login() {
+        document.getElementById("loginId").action = "/reader/loginaction";
+        document.getElementById("loginId").submit();
+    }
 
-<!--</script>-->
+    function register() {
+        document.getElementById("loginId").action = "/reader/register";
+        document.getElementById("loginId").submit();
+    }
+</script>
 </html>
