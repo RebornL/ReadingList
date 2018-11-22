@@ -2,14 +2,15 @@
 <head>
     <title>Reading List</title>
     <link rel="stylesheet" th:href="@{/style.css}">
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <!--<script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>-->
     <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 </head>
 <body style="margin-left: 2%;margin-top: 2%;" background="/city.jpg">
-    <h2 class="fontClass">Your Reading List</h2>
-    <div class="row" th:unless="${#lists.isEmpty(books)}">
+    <h2 class="fontClass">我的已读书目</h2>
+    <div class="row justify-content-start" th:unless="${#lists.isEmpty(books)}">
         <!--<div >-->
             <div class="col-sm-3" th:each="book : ${books}">
                 <div class="card" style="width: 18rem;">
@@ -33,15 +34,15 @@
         <p>You have no books in your book list</p>
     </div>
     <hr/>
-    <h3 class="fontClass">Add a book</h3>
+    <h3 class="fontClass">添加新书</h3>
     <form method="POST" action="#" th:action="@{/readingList/mark}" th:object="${bookEntity}">
         <input type="hidden" th:field="*{reader}" th:value="${reader}">
         <div class="form-group">
-        <label for="title" class="fontClass">Title:</label>
+        <label for="title" class="fontClass">标题:</label>
         <input type="text" th:field="*{title}" id="title" class="form-control" name="title" size="50" style="width: 220px;">
         </div>
         <div class="form-group">
-        <label for="author" class="fontClass">Author:</label>
+        <label for="author" class="fontClass">作者:</label>
         <input type="text" th:field="*{author}" id="author" class="form-control" name="author" size="50" style="width: 220px;">
         </div>
         <div class="form-group">
@@ -49,7 +50,7 @@
         <input type="text" th:field="*{isbn}" id="isbn" class="form-control" name="isbn" size="15" style="width: 220px;">
         </div>
         <div class="form-group">
-        <label for="description" class="fontClass">Description:</label><br/>
+        <label for="description" class="fontClass">描述:</label><br/>
         <textarea th:field="*{description}" id="description" class="text-area" name="description" cols="80" rows="5">
         </textarea>
         </div>
